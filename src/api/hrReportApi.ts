@@ -250,21 +250,27 @@ const normalizeDepartmentSalaryRows = (payload: any): DepartmentSalaryRow[] => {
 
   return rows;
 };
-
 // Staff Strength API
 export const getStaffStrengthReport = async (): Promise<StaffRow[]> => {
   try {
-    const response = await instance.get('/admin/reports/staff-strength');
+    const response = await instance.get('/api/reports/staff-strength');
+
     const rows = normalizeStaffRows(response.data);
+
     return rows.length ? rows : getMockStaffData();
+
   } catch {
     try {
-      const response = await instance.get(`${BASE_URL}/admin/reports/staff-strength`);
+      const response = await instance.get(`${BASE_URL}/api/reports/staff-strength`);
+
       const rows = normalizeStaffRows(response.data);
+
       return rows.length ? rows : getMockStaffData();
+
     } catch (error) {
+
       console.error('Error fetching staff strength:', error);
-      // Fallback mock data
+
       return getMockStaffData();
     }
   }
@@ -371,18 +377,19 @@ export const getLeaveReport = async (
   }
 };
 
-// Payroll API
 export const getPayrollReport = async (): Promise<PayrollRow[]> => {
   try {
-    const response = await instance.get(`${BASE_URL}/admin/reports/payroll`, {
-      responseType: 'text',
-      headers: {Accept: 'text/html,application/xhtml+xml'},
-    });
+    const response = await instance.get(
+      `${BASE_URL}/api/reports/payroll`
+    );
 
-    const rows = normalizePayrollRows(response.data);
-    return rows.length ? rows : getMockPayrollData();
+    console.log("Payroll API:", response.data);
+
+    return response.data;
+
   } catch (error) {
-    console.error('Error fetching payroll:', error);
+    console.error("Error fetching payroll:", error);
+
     return getMockPayrollData();
   }
 };

@@ -14,6 +14,7 @@ const DepartmentSalaryReport = () => {
     const loadData = async () => {
       const payload = await getDepartmentSalaryReport();
       if (isMounted) {
+        
         setRows(payload || []);
       }
     };
