@@ -35,22 +35,23 @@ const normalizeDashboardSummary = (payload: any): HRDashboardSummary => {
     totalReports,
   };
 };
-
 export const getHRDashboardSummary = async (): Promise<HRDashboardSummary> => {
   try {
-    const response = await instance.get('/admin/reports');
+    const response = await instance.get('/reports/dashboard');
+
     return normalizeDashboardSummary(response.data);
-  } catch {
-    try {
-      const response = await instance.get(`${BASE_URL}/admin/reports`);
-      return normalizeDashboardSummary(response.data);
-    } catch (error) {
-      console.log('Error fetching dashboard summary:', error);
-      return {
-        totalEmployees: 0,
-        totalReports: 6,
-      };
-    }
+
+  } catch (error) {
+
+    console.log(
+      'Error fetching dashboard summary:',
+      error
+    );
+
+    return {
+      totalEmployees: 0,
+      totalReports: 6,
+    };
   }
 };
 
@@ -253,7 +254,7 @@ const normalizeDepartmentSalaryRows = (payload: any): DepartmentSalaryRow[] => {
 // Staff Strength API
 export const getStaffStrengthReport = async (): Promise<StaffRow[]> => {
   try {
-    const response = await instance.get('/api/reports/staff-strength');
+    const response = await instance.get('/reports/staff-strength');
 
     const rows = normalizeStaffRows(response.data);
 

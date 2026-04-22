@@ -15,6 +15,11 @@ import {
   PayrollReport,
   OvertimeReport,
   DepartmentSalaryReport,
+  EmergencyRecords,
+  PatientPortalDashboard,
+  PatientPortalAppointments,
+  PatientPortalLabReports,
+  PatientPortalRadiologyReports,
 } from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 
@@ -98,6 +103,36 @@ export default () => {
         name="DepartmentSalaryReport"
         component={DepartmentSalaryReport}
         options={{title: 'Department Salary', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="EmergencyRecords"
+        component={EmergencyRecords}
+        options={{title: 'Emergency Records', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="PatientPortalDashboard"
+        component={PatientPortalDashboard}
+        options={{title: 'Patient Dashboard', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="PatientPortalAppointments"
+        component={PatientPortalAppointments}
+        options={{title: 'Appointments', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="PatientPortalLabReports"
+        component={PatientPortalLabReports}
+        options={{title: 'Lab Reports', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="PatientPortalRadiologyReports"
+        component={PatientPortalRadiologyReports}
+        options={{title: 'Radiology Reports', headerShown: false}}
       />
 
     </Stack.Navigator>
