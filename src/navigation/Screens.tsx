@@ -15,6 +15,8 @@ import {
   PayrollReport,
   OvertimeReport,
   DepartmentSalaryReport,
+  BillingList,
+  BillingEntry,
   EmergencyRecords,
   PatientPortalDashboard,
   PatientPortalAppointments,
@@ -103,6 +105,18 @@ export default () => {
         name="DepartmentSalaryReport"
         component={DepartmentSalaryReport}
         options={{title: 'Department Salary', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="BillingList"
+        component={BillingList}
+        options={{title: 'Billing', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="BillingEntry"
+        component={BillingEntry}
+        options={{title: 'Add Billing', headerShown: false}}
       />
 
       <Stack.Screen

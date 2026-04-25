@@ -89,6 +89,7 @@ const DrawerContent = (
     {name: t('screens.articles'), to: 'Articles', icon: assets.document},
     {name: 'Emergency Records', to: 'EmergencyRecords', icon: assets.document},
     {name: 'HR Reports', to: 'HRReportDashboard', icon: assets.document},
+    {name: 'Billing', to: 'BillingList', icon: assets.document},
     {name: 'Patient Portal', to: 'PatientPortalDashboard', icon: assets.document},
     {name: t('screens.rental'), to: 'Pro', icon: assets.rental},
     {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
