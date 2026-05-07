@@ -17,6 +17,7 @@ import {Ionicons} from '@expo/vector-icons';
 import {Button, Text} from '../components';
 import {useTheme} from '../hooks';
 import { getDepartments } from "../api/hrReportApi";
+import { getOvertimeReport } from "../api/hrReportApi";
 
 type PickerField = 'fromDate' | 'toDate';
 
@@ -31,6 +32,9 @@ const OvertimeReport = () => {
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const [toDate, setToDate] = useState<Date | null>(null);
   const [pickerField, setPickerField] = useState<PickerField | null>(null);
+ const [overtimeData, setOvertimeData] = useState<any[]>([]);
+const [totalHours, setTotalHours] = useState(0);
+const [totalAmount, setTotalAmount] = useState(0);
 
   const formatDate = (date: Date | null) => {
     if (!date) return 'mm/dd/yyyy';
@@ -66,7 +70,36 @@ const OvertimeReport = () => {
   useEffect(() => {
     loadDepartments();
   }, []);
+const loadOvertime = async () => {
+  try {
+    const response = await getOvertimeReport(
+      fromDate,
+      toDate,
+      employeeName,
+      department
+    );
 
+    console.log("Overtime API:", response);
+
+    setOvertimeData(
+      response?.records || []
+    );
+
+    setTotalHours(
+      response?.totalHours || 0
+    );
+
+    setTotalAmount(
+      response?.totalAmount || 0
+    );
+
+  } catch (error) {
+    console.log(
+      "Error loading overtime:",
+      error
+    );
+  }
+};
   return (
     <ScrollView
       style={styles.screen}
@@ -101,7 +134,7 @@ const OvertimeReport = () => {
         color="#D81B8C"
         shadow={false}
         style={styles.filterButton}
-        onPress={() => null}>
+        onPress={loadOvertime}>
         <Text white semibold center>
           FILTER
         </Text>
@@ -125,6 +158,51 @@ const OvertimeReport = () => {
             <TableHeader title="Amount" width={140} />
           </View>
         </View>
+        {overtimeData.map((item, index) => (
+  <View key={index} style={styles.tableRow}>
+    
+    <TableCell
+      value={item.staff?.employee_id}
+      width={130}
+    />
+
+    <TableCell
+      value={item.staff?.name}
+      width={120}
+    />
+
+    <TableCell
+      value={item.department?.department_name}
+      width={200}
+    />
+
+    <TableCell
+      value={item.shift_id}
+      width={100}
+    />
+
+    <TableCell
+      value={item.attendance_date}
+      width={100}
+    />
+
+    <TableCell
+      value={item.overtime_hours?.toFixed(2)}
+      width={160}
+    />
+
+    <TableCell
+      value="100"
+      width={100}
+    />
+
+    <TableCell
+      value={item.amount?.toFixed(2)}
+      width={140}
+    />
+
+  </View>
+))}
       </ScrollView>
 <DropdownModal
   visible={showDepartmentDropdown}
@@ -143,7 +221,7 @@ const OvertimeReport = () => {
       );
 
     setDepartment(
-      selectedDept?.id ||
+        selectedDept?.department_name ||
       "All Departments"
     );
 

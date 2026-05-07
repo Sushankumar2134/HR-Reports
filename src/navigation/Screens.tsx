@@ -17,12 +17,17 @@ import {
   DepartmentSalaryReport,
   BillingList,
   BillingEntry,
+  RefundList,
+  CreateRefund,
+  EditRefund,
   EmergencyRecords,
+  // EMR access module is registered directly from the new screen file.
   PatientPortalDashboard,
   PatientPortalAppointments,
   PatientPortalLabReports,
   PatientPortalRadiologyReports,
 } from '../screens';
+import DischargeSummaryList from '../screens/EMRAccess/DischargeSummaryList';
 import {useScreenOptions, useTranslation} from '../hooks';
 
 const Stack = createStackNavigator();
@@ -120,9 +125,33 @@ export default () => {
       />
 
       <Stack.Screen
+        name="RefundList"
+        component={RefundList}
+        options={{title: 'Refund Management', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="CreateRefund"
+        component={CreateRefund}
+        options={{title: 'Create Refund', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="EditRefund"
+        component={EditRefund}
+        options={{title: 'Edit Refund', headerShown: false}}
+      />
+      
+      <Stack.Screen
         name="EmergencyRecords"
         component={EmergencyRecords}
         options={{title: 'Emergency Records', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="EMRAccess"
+        component={DischargeSummaryList}
+        options={{title: 'Discharge Summary List', headerShown: false}}
       />
 
       <Stack.Screen

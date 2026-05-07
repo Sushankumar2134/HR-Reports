@@ -399,8 +399,6 @@ export const getPayrollPayslipUrl = (idOrEmployeeId: string | number) => {
   const identifier = encodeURIComponent(String(idOrEmployeeId));
   return `${BASE_URL}/admin/reports/payroll/payslip/${identifier}`;
 };
-
-// Overtime API
 export const getOvertimeReport = async (
   fromDate?: string,
   toDate?: string,
@@ -408,16 +406,39 @@ export const getOvertimeReport = async (
   department?: string,
 ) => {
   try {
-    const response = await instance.get('/hr/overtime', {
-      params: {fromDate, toDate, employee, department},
-    });
+    const response = await instance.get(
+      '/reports/overtime',
+      {
+        params: {
+          from_date: fromDate,
+          to_date: toDate,
+          employee: employee,
+          department_id: department,
+        },
+      }
+    );
+
+    console.log(
+      "Overtime API Response:",
+      response.data
+    );
+
     return response.data;
+
   } catch (error) {
-    console.error('Error fetching overtime:', error);
-    return [];
+
+    console.log(
+      "Error fetching overtime:",
+      error
+    );
+
+    return {
+      records: [],
+      totalHours: 0,
+      totalAmount: 0,
+    };
   }
 };
-
 // Department Salary API
 export const getDepartmentSalaryReport = async () => {
   try {
