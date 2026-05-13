@@ -20,6 +20,10 @@ import {
   RefundList,
   CreateRefund,
   EditRefund,
+  ConcentList,
+  ConcentDetails,
+  ConcentHistory,
+  CreateConsent,
   EmergencyRecords,
   // EMR access module is registered directly from the new screen file.
   PatientPortalDashboard,
@@ -140,6 +144,30 @@ export default () => {
         name="EditRefund"
         component={EditRefund}
         options={{title: 'Edit Refund', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="ConcentList"
+        component={ConcentList}
+        options={{title: 'Surgery Consent', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="ConcentDetails"
+        component={ConcentDetails}
+        options={{title: 'Consent Details', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="ConcentHistory"
+        component={ConcentHistory}
+        options={{title: 'Consent History', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="CreateConsent"
+        component={CreateConsent}
+        options={{title: 'Create Consent', headerShown: false}}
       />
       
       <Stack.Screen

@@ -92,6 +92,7 @@ const DrawerContent = (
     {name: 'EMR-Access Module', to: 'EMRAccess', icon: assets.document},
     {name: 'Billing', to: 'BillingList', icon: assets.document},
     {name: 'Refund Management', to: 'RefundList', icon: assets.document},
+    {name: 'Surgery Consent', to: 'ConcentList', icon: assets.document},
     {name: 'Patient Portal', to: 'PatientPortalDashboard', icon: assets.document},
     {name: t('screens.rental'), to: 'Pro', icon: assets.rental},
     {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
