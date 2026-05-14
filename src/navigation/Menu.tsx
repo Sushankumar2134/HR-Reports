@@ -71,11 +71,26 @@ const DrawerContent = (
   const {assets, colors, gradients, sizes} = useTheme();
   const labelColor = colors.text;
 
+  const subscriptionMenuItems = [
+    {name: 'Plans', to: 'SubscriptionManagement', params: {menuKey: 'plans'}},
+    {
+      name: 'Organization Subscriptions',
+      to: 'SubscriptionManagement',
+      params: {menuKey: 'organizationSubscriptions'},
+    },
+    {name: 'Usage Monitoring', to: 'SubscriptionManagement', params: {menuKey: 'usageMonitoring'}},
+    {
+      name: 'Subscription Invoices',
+      to: 'SubscriptionManagement',
+      params: {menuKey: 'subscriptionInvoices'},
+    },
+  ];
+
   const handleNavigation = useCallback(
-    (to: string) => {
+    (to: string, params?: Record<string, string>) => {
       setActive(to);
       // Properly navigate to screens in the stack
-      navigation.navigate('Screens', { screen: to });
+      navigation.navigate('Screens', { screen: to, params });
     },
     [navigation, setActive],
   );
@@ -94,6 +109,7 @@ const DrawerContent = (
     {name: 'Refund Management', to: 'RefundList', icon: assets.document},
     {name: 'Surgery Consent', to: 'ConcentList', icon: assets.document},
     {name: 'Patient Portal', to: 'PatientPortalDashboard', icon: assets.document},
+    {name: 'Subscription Management', to: 'SubscriptionManagement', icon: assets.document},
     {name: t('screens.rental'), to: 'Pro', icon: assets.rental},
     {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
     {name: t('screens.settings'), to: 'Pro', icon: assets.settings},
@@ -131,33 +147,62 @@ const DrawerContent = (
         {screens?.map((screen, index) => {
           const isActive = active === screen.to;
           return (
-            <Button
-              row
-              justify="flex-start"
-              marginBottom={sizes.s}
-              key={`menu-screen-${screen.name}-${index}`}
-              onPress={() => handleNavigation(screen.to)}>
-              <Block
-                flex={0}
-                radius={6}
-                align="center"
-                justify="center"
-                width={sizes.md}
-                height={sizes.md}
-                marginRight={sizes.s}
-                gradient={gradients[isActive ? 'primary' : 'white']}>
-                <Image
-                  radius={0}
-                  width={14}
-                  height={14}
-                  source={screen.icon}
-                  color={colors[isActive ? 'white' : 'black']}
-                />
-              </Block>
-              <Text p semibold={isActive} color={labelColor}>
-                {screen.name}
-              </Text>
-            </Button>
+            <React.Fragment key={`menu-screen-${screen.name}-${index}`}>
+              <Button
+                row
+                justify="flex-start"
+                marginBottom={sizes.s}
+                onPress={() => handleNavigation(screen.to)}>
+                <Block
+                  flex={0}
+                  radius={6}
+                  align="center"
+                  justify="center"
+                  width={sizes.md}
+                  height={sizes.md}
+                  marginRight={sizes.s}
+                  gradient={gradients[isActive ? 'primary' : 'white']}>
+                  <Image
+                    radius={0}
+                    width={14}
+                    height={14}
+                    source={screen.icon}
+                    color={colors[isActive ? 'white' : 'black']}
+                  />
+                </Block>
+                <Text p semibold={isActive} color={labelColor}>
+                  {screen.name}
+                </Text>
+              </Button>
+
+              {screen.to === 'SubscriptionManagement' && (
+                <Block marginLeft={sizes.md + sizes.s} marginBottom={sizes.s}>
+                  {subscriptionMenuItems.map((item, subIndex) => (
+                    <Button
+                      key={`subscription-menu-${item.name}-${subIndex}`}
+                      row
+                      justify="flex-start"
+                      marginBottom={sizes.s / 2}
+                      onPress={() => handleNavigation(item.to, item.params)}>
+                      <Block
+                        flex={0}
+                        radius={6}
+                        align="center"
+                        justify="center"
+                        width={18}
+                        height={18}
+                        marginRight={sizes.s}
+                        gradient={gradients.white}>
+                        <></>
+                      </Block>
+                      <Text p color={labelColor} size={14}>
+                        {item.name}
+                      </Text>
+                    </Button>
+                  ))}
+                </Block>
+              )}
+            </React.Fragment>
           );
         })}
 

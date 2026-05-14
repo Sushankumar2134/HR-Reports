@@ -32,3 +32,4 @@ export {default as PatientPortalDashboard} from './PatientPortal/PatientDashboar
 export {default as PatientPortalAppointments} from './PatientPortal/Appointments';
 export {default as PatientPortalLabReports} from './PatientPortal/LabReports';
 export {default as PatientPortalRadiologyReports} from './PatientPortal/RadiologyReports';
+export {default as SubscriptionManagement} from './SubscriptionManagement/SubscriptionManagement';

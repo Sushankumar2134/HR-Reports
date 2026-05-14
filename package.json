@@ -38,6 +38,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.3",
+    "react-native-date-picker": "^5.0.13",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-keyboard-aware-scroll-view": "0.9.5",
     "react-native-pager-view": "6.7.1",

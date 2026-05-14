@@ -30,6 +30,7 @@ import {
   PatientPortalAppointments,
   PatientPortalLabReports,
   PatientPortalRadiologyReports,
+  SubscriptionManagement,
 } from '../screens';
 import DischargeSummaryList from '../screens/EMRAccess/DischargeSummaryList';
 import {useScreenOptions, useTranslation} from '../hooks';
@@ -204,6 +205,12 @@ export default () => {
         name="PatientPortalRadiologyReports"
         component={PatientPortalRadiologyReports}
         options={{title: 'Radiology Reports', headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="SubscriptionManagement"
+        component={SubscriptionManagement}
+        options={{title: 'Subscription Management', headerShown: false}}
       />
 
     </Stack.Navigator>
